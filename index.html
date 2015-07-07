@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <title>Basic Example with JSX</title>
+     <link rel="stylesheet" href="base.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+  </head>
+  <body>
+    <script src="shared/thirdparty/es5-shim.min.js"></script>
+    <script src="shared/thirdparty/es5-sham.min.js"></script>
+    <script src="shared/thirdparty/console-polyfill.js"></script>
+    <script src="build/jquery.js"></script>        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+
+    <script src="build/typeahead.bundle.min.js"></script>  
+    <script src="build/typeahead-addresspicker.min.js"></script>    
+    <script src="build/react.js"></script>
+    <script src="build/JSXTransformer.js"></script>
+    <script type="text/jsx">
+    
+
+      // http://twitter.github.io/typeahead.js/data/films/post_1960.json
+
+      var Autocomplete = React.createClass({
+        componentDidMount: function(){
+          var addressPicker = new AddressPicker();
+          $('.typeahead').typeahead(null, {
+            displayKey: 'description',
+            source: addressPicker.ttAdapter()
+          });
+          addressPicker.bindDefaultTypeaheadEvent($('.typeahead'))
+
+        },
+        render: function(){
+          return (
+            <div className="container">
+              <h2>Origin</h2>
+              <input id='address' className="typeahead" type="text" />
+              <h2>Destination</h2>
+              <input className="typeahead" type="text" />
+
+              <h4 className="top-margin">Example Details</h4>
+              <p>This is written with JSX and transformed in the browser.</p>
+              <p>
+                Learn more about React at <a href="https://facebook.github.io/react" target="_blank">facebook.github.io/react</a>.
+              </p>
+            </div>
+          );
+        }
+      })
+      
+
+      React.render(
+        <Autocomplete />,
+        document.body
+      );
+    </script>
+  </body>
+</html>
